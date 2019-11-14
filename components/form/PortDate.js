@@ -11,7 +11,7 @@ export default class PortDate extends React.Component {
     super(props);
 
     
-    const dateValue = new Date()
+    const dateValue = props.initialDate ? new Date(props.initialDate) : new Date()
     const isHidden = props.initialDate ? false : true;
 
     this.state = {
