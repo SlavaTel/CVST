@@ -1,0 +1,4 @@
+/node_modules
+/.next
+/resources
+/server/config/dev.js
