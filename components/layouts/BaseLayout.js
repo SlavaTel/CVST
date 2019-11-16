@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../shared/Header'
+import Head from 'next/head'
 
 
 
@@ -8,14 +9,20 @@ const BaseLayout = (props) => {
   const headerType = props.headerType || 'default'
 
   return (
-   <div className="layout-container">
-    <Header className={`port-nav-${headerType}`}  isAuthenticated={isAuthenticated} user={user} /> 
-    <main className={`cover ${className}`}>
-      <div className="wrapper">
-        {children}
-      </div> 
-    </main>
-   </div>
+    <React.Fragment>.
+      <Head>
+        <title>Slava Telyatko</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+      </Head>
+      <div className="layout-container">
+        <Header className={`port-nav-${headerType}`}  isAuthenticated={isAuthenticated} user={user} /> 
+        <main className={`cover ${className}`}>
+          <div className="wrapper">
+            {children}
+          </div> 
+        </main>
+      </div>
+    </React.Fragment>
   )
 }
 
