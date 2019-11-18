@@ -1,12 +1,17 @@
 import React from 'react'
 import styled from 'react-emotion'
 
+function assignColor(props){
+  const color = props =>
+  props.reversed
+    ? props.active ? 'white' : '#aaa'
+    : props.active ? 'black' : '#ccc'
+  return color  
+}
+
 export const Button = styled('span')`
   cursor: pointer;
-  color: ${props =>
-    props.reversed
-      ? props.active ? 'white' : '#aaa'
-      : props.active ? 'black' : '#ccc'};
+  color: ${assignColor}
 `
 
 export const Icon = styled(({ className, ...rest }) => {
@@ -18,10 +23,10 @@ export const Icon = styled(({ className, ...rest }) => {
 
 export const Menu = styled('div')`
   & > * {
-    display: inline-block;
+    display: inline-block
   }
   & > * + * {
-    margin-left: 15px;
+    margin-left: 15px
   }
 `
 
