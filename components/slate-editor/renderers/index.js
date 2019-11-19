@@ -85,6 +85,7 @@ export const renderBlockButton = (type, icon, editor) => {
   return(
     <Button
       active={isActive}
+      reversed
       onMouseDown={event => onClickBlock(event, type, editor)}
     >
       <Icon>{icon}</Icon>

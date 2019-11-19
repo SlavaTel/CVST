@@ -15,7 +15,7 @@ const bodyParser = require('body-parser')
 
 const bookRoutes = require('./routes/book')
 const portfolioRoutes = require('./routes/portfolio')
-
+const blogRoutes = require('./routes/blog')
 const secretData = [
   {
     title: 'SecretData 1',
@@ -30,6 +30,7 @@ const secretData = [
 mongoose.connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => console.log('Database Connected!'))
         .catch(err => console.error(err))
+mongoose.set('useCreateIndex', true)
 
 // async () => await (mongoose.connect(config.DB_URI,{ useNewUrlParser: true }))()
 
@@ -42,6 +43,8 @@ app.prepare()
 
   server.use('/api/v1/books', bookRoutes)
   server.use('/api/v1/portfolios', portfolioRoutes)
+  server.use('/api/v1/blogs', blogRoutes)
+
 
   server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
     return res.json(secretData);
