@@ -5,14 +5,43 @@ import withAuth from '../components/hoc/withAuth';
 
 import SlateEditor from '../components/slate-editor/Editor'
 
+import { saveBlog } from '../actions/index'
+
 class BlogEditor extends React.Component {
+
+
+  constructor(props) {
+    super(props) 
+
+    this.state = {
+      isSaving: false
+    }
+    this.saveBlog = this.saveBlog.bind(this)
+    }
   
+  
+  saveBlog(heading) {
+
+    const blog = {}
+    blog.title = heading.title
+    blog.subtitle = heading.subtitle
+    this.setState({isSaving: true})
+
+    saveBlog().then(data => {
+      debugger;
+      this.setState({isSaving: false})
+      console.log(data)
+    })
+  }
+
+
 
   render() {
+    const { isSaving } = this.state
     return(
     <BaseLayout {...this.props.auth}>
      <BasePage containerClass="editor-wrapper" className="blog-editor-page" >
-      <SlateEditor />
+      <SlateEditor isLoading={isSaving} save={this.saveBlog}/>
      </BasePage> 
     </BaseLayout>
     )

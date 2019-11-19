@@ -51,6 +51,30 @@ export default class SlateEditor extends React.Component {
       rect.width / 2}px`
   }
 
+  getTitle() {
+    const { value } = this.state
+    const firstBlock = value.document.getBlocks().get(0)
+    const secondBlock = value.document.getBlocks().get(1)    
+
+    const title = firstBlock && firstBlock.text ? firstBlock.text : 'No Title'
+    const subtitle = secondBlock && secondBlock.text ? secondBlock.text : 'No Subtitle'
+
+    return {
+      title,
+      subtitle
+    }
+  }
+
+
+
+   save() {
+     const {save} = this.props
+     const headingValues = this.getTitle()
+
+     save(headingValues)
+   } 
+
+
   // Render the editor.
   render() {
     const { isLoaded } = this.state;
@@ -58,7 +82,8 @@ export default class SlateEditor extends React.Component {
     return (
       <React.Fragment>
         { isLoaded &&
-          <Editor placeholder="Enter some text..."
+          <Editor {...this.props}
+                  placeholder="Enter some text..."
                   value={this.state.value}
                   onChange={this.onChange}
                   renderMark={renderMark}
@@ -72,9 +97,10 @@ export default class SlateEditor extends React.Component {
 
   renderEditor = (props, editor, next) => {
     const children = next()
+    const {isLoading} = props
     return (
       <React.Fragment>
-        <ControllMenu></ControllMenu>
+        <ControllMenu isLoading={isLoading} save={() => this.save()}></ControllMenu>
         {children}
         <HoverMenu innerRef={menu => (this.menu = menu)} editor={editor} />
       </React.Fragment>
