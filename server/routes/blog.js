@@ -4,18 +4,15 @@ const blogCtrl = require('../controllers/blog')
 const authService = require('../services/auth')
 
 
+router.get('/:id',  blogCtrl.getBlogById)
 
 router.post('', authService.checkJWT, 
                 authService.checkRole('siteOwner'), 
                 blogCtrl.createBlog)
 
-// router.get('',  blogCtrl.getBlogs)
-
-router.get('/:id',  blogCtrl.getBlogById)
-
-// router.patch('/:id', authService.checkJWT,
-//                      authService.checkRole('siteOwner'), 
-//                      blogCtrl.updateBlog)
+router.patch('/:id', authService.checkJWT,
+                     authService.checkRole('siteOwner'), 
+                     blogCtrl.updateBlog)
 
 // router.delete('/:id', authService.checkJWT, 
 //                       authService.checkRole('siteOwner'), 

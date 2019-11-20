@@ -4,4 +4,7 @@ module.exports = routes()
 .add('portfolioNew', '/portfolios/new')
 .add('portfolio','/portfolio/:id')
 .add('portfolioEdit','/portfolios/:id/edit')
+.add('blogEditorUpdate','/blogs/:id/edit')
+
+
 

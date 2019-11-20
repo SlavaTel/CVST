@@ -2,3 +2,4 @@
 /.next
 /resources
 /server/config/dev.js
+.prettierrc
