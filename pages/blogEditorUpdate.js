@@ -4,8 +4,10 @@ import BasePage from '../components/shared/BasePage'
 import withAuth from '../components/hoc/withAuth';
 
 import SlateEditor from '../components/slate-editor/Editor'
+import { toast } from 'react-toastify';
 
 import { getBlogById, updateBlog } from '../actions/index'
+
 
 class BlogEditorUpdate extends React.Component {
 
@@ -43,12 +45,17 @@ class BlogEditorUpdate extends React.Component {
     this.setState({isSaving: true})
 
     updateBlog(updatedBlog, blog._id).then(updatedBlog => {
-
+      toast.success('Blog Saved Successfully!', {
+        position: toast.POSITION.TOP_CENTER, autoClose: 2000
+      });
       this.setState({isSaving: false})
 
     }).catch(err => {
       this.setState({isSaving: false})
       const message = err.message || 'Server Error!'
+      toast.error('Unexpected Error, Copy your progress and refresh browser please.', {
+        position: toast.POSITION.TOP_CENTER, autoClose: 5000
+      });       
       console.error(message)
     })
   }
