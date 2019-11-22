@@ -32,7 +32,7 @@ class UserBlogs extends React.Component {
 
 
   deleteBlogWarning(blogId){
-    const res = confirm('Are you sure you want to delere this post?')
+    const res = confirm('Are you sure you want to delete this post?')
 
     if (res) {
       toast.warn('Blog Deleted!', {
