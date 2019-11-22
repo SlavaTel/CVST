@@ -29,6 +29,12 @@ class UserBlogs extends React.Component {
     })
   }
 
+  deleteBlog() {
+    alert('Deleting Blog')
+  }
+
+
+
   separateBlogs(blogs) {
     const published = []
     const drafts = []
@@ -41,8 +47,8 @@ class UserBlogs extends React.Component {
 
 
   createStatus(status) {
-    return status === 'draft' ? {view: 'Publish Story', value: 'published'}
-                              : {view: 'Make a Draft', value: 'draft'};
+    return status === 'draft' ? {view: 'Publish Story', value: 'published'} 
+                              : {view: 'Make a Draft', value: 'draft'}
   }
 
   dropdownOptions = (blog) => {
