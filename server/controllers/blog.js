@@ -4,6 +4,22 @@ const AsyncLock = require('async-lock');
 const lock = new AsyncLock();
 
 
+
+exports.getBlogs = (req, res) => {
+
+  Blog.find({status: 'published'})
+      .sort({'createdAt': -1})
+      .exec(function(err, publishedBlogs) {
+    if (err) {
+      return res.status(422).send(err)
+    }
+
+    return res.json(publishedBlogs)
+    })
+
+}
+
+
 exports.getBlogById = (req ,res) => {
   const blogId = req.params.id
 
@@ -57,9 +73,6 @@ exports.updateBlog = (req, res) => {
 }
 
 
-
-
-
 exports.createBlog = (req, res) => {
   const lockId = req.query.lockId;
 
@@ -82,12 +95,25 @@ exports.createBlog = (req, res) => {
 
       return res.json(createdBlog);
     });
-    }, function(err, ret) {
+    }, function(err) {
         err && console.error(err)
     });
   } else {
     return res.status(422).send({message: 'Blog is getting saved!'});
   }
+}
+
+
+exports.deleteBlog = (req, res)=> {
+  const blogId = req.params.id;
+
+  Blog.deleteOne({_id: blogId}, function(err) {
+    if (err) {
+      return res.status(422).send(err);
+    }
+
+    res.json({status: 'deleted'});
+  });
 }
 
 

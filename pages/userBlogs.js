@@ -1,10 +1,11 @@
 import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout'
 import BasePage from '../components/shared/BasePage'
+import { toast } from 'react-toastify';
 import { Container, Col, Row} from 'reactstrap'
 import withAuth from '../components/hoc/withAuth'
-import { getUserBlogs, updateBlog } from '../actions'
-import {Link} from '../routes'
+import { getUserBlogs, updateBlog, deleteBlog } from '../actions'
+import {Link, Router} from '../routes'
 import PortButtonDropdown from '../components/ButtonDropdown'
 
 class UserBlogs extends React.Component {
@@ -29,8 +30,24 @@ class UserBlogs extends React.Component {
     })
   }
 
-  deleteBlog() {
-    alert('Deleting Blog')
+
+  deleteBlogWarning(blogId){
+    const res = confirm('Are you sure you want to delere this post?')
+
+    if (res) {
+      toast.warn('Blog Deleted!', {
+        position: toast.POSITION.TOP_CENTER, autoClose: 2000})
+      this.deleteBlog(blogId)
+    }
+  }
+
+  deleteBlog(blogId) {
+    deleteBlog(blogId)
+      .then(status => {
+        Router.pushRoute('/userBlogs');
+      })
+      .catch(err => console.error(err.message)
+    )
   }
 
 
@@ -38,6 +55,7 @@ class UserBlogs extends React.Component {
   separateBlogs(blogs) {
     const published = []
     const drafts = []
+
     blogs.forEach((blog) => {
       blog.status === 'draft' ? drafts.push(blog) : published.push(blog)
     })
@@ -107,11 +125,11 @@ class UserBlogs extends React.Component {
       <BasePage className="blog-user-page">
         <Row>
           <Col md="6" className="mx-auto text-center">
-            <h2 classname="block-status-title" >Published Blogs</h2>
+            <h2 className="block-status-title" >Published Blogs</h2>
             {this.renderBlogs(published)}
           </Col>
           <Col md="6" className="mx-auto text-center">
-            <h2 classname="block-status-title" >Drafts Blogs</h2>  
+            <h2 className="block-status-title" >Drafts Blogs</h2>  
             {this.renderBlogs(drafts)}                    
           </Col>
         </Row>
