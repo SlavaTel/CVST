@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseLayout from '../layouts/BaseLayout'
-import BasePage from '../shared/BasePage'
+import BasePage from '../BasePage'
 
 const namespace = 'http://localhost:3000/'
 

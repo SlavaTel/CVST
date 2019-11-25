@@ -1,6 +1,6 @@
 import React from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
-import BasePage from '../components/shared/BasePage'
+import BasePage from '../components/BasePage'
 import { withRouter } from 'next/router'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ class Portfolio extends React.Component {
     let portfolio = {};
 
     try {
-      const response = await axios.get(`https://jsonplaceholder.typicode.com/opsts/${portfolioId}`);
+      const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${portfolioId}`);
       portfolio = response.data;
     } catch(err) {
 

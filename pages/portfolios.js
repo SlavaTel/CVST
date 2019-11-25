@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout'
-import BasePage from '../components/shared/BasePage'
+import BasePage from '../components/BasePage'
 import { Button, Col, Row} from 'reactstrap'
 import PortfolioCard from '../components/portfolios/PortfolioCard'
 import { Router } from '../routes'
