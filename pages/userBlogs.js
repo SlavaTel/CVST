@@ -2,7 +2,7 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout'
 import BasePage from '../components/shared/BasePage'
 import { toast } from 'react-toastify';
-import { Container, Col, Row} from 'reactstrap'
+import { Container, Col, Row, Button} from 'reactstrap'
 import withAuth from '../components/hoc/withAuth'
 import { getUserBlogs, updateBlog, deleteBlog } from '../actions'
 import {Link, Router} from '../routes'
@@ -107,34 +107,37 @@ class UserBlogs extends React.Component {
     const {published, drafts} = this.separateBlogs(blogs)
 
 
-    return(
-      <BaseLayout {...this.props.auth} headerType={'landing'}>
-      <div className="masthead" style={{"backgroundImage": "url('/static/images/home-bg.jpg')"}}>
-        <div className="overlay"></div>
-        <Container>
-          <div className="row">
-            <div className="col-lg-8 col-md-10 mx-auto">
-              <div className="site-heading">
-                <h1>Fresh Blogs</h1>
-                <span className="subheading">Programming, travelling...</span>
+    return (
+        <BaseLayout {...this.props.auth} headerType={'landing'}>
+        <div className="masthead" style={{"backgroundImage": "url('/static/images/home-bg.jpg')"}}>
+          <div className="overlay"></div>
+          <Container>
+            <div className="row">
+              <div className="col-lg-8 col-md-10 mx-auto">
+                <div className="site-heading">
+                  <h1>Blogs dashboard</h1>
+                  <span className="subheading">Let's write some nice blog today{' '}
+                    <Link route='/blogs/new'>
+                  <Button color="primary"> Create a new Blog </Button>
+                </Link></span>
+                </div>
               </div>
             </div>
-          </div>
-        </Container>
-      </div>
-      <BasePage className="blog-user-page">
-        <Row>
-          <Col md="6" className="mx-auto text-center">
-            <h2 className="block-status-title" >Published Blogs</h2>
-            {this.renderBlogs(published)}
-          </Col>
-          <Col md="6" className="mx-auto text-center">
-            <h2 className="block-status-title" >Drafts Blogs</h2>  
-            {this.renderBlogs(drafts)}                    
-          </Col>
-        </Row>
-      </BasePage>
-    </BaseLayout>
+          </Container>
+        </div>
+        <BasePage className="blog-user-page">
+          <Row>
+            <Col md="6" className="mx-auto text-center">
+              <h2 className="block-status-title" >Published Blogs</h2>
+              {this.renderBlogs(published)}
+            </Col>
+            <Col md="6" className="mx-auto text-center">
+              <h2 className="block-status-title" >Drafts Blogs</h2>  
+              {this.renderBlogs(drafts)}                    
+            </Col>
+          </Row>
+        </BasePage>
+      </BaseLayout>
     )
   }
 }

@@ -5,7 +5,7 @@ import { Container, Col, Row} from 'reactstrap'
 import { Link } from '../routes'
 import moment from 'moment'
 import { getBlogs } from '../actions';
-
+import { shortenText } from '../helpers/utils'
 
 class Blogs extends React.Component {
 
@@ -29,7 +29,7 @@ class Blogs extends React.Component {
               {blog.title}
             </h2>
             <h3 className="post-subtitle">
-            {blog.subTitle}
+            {shortenText(blog.subTitle)}
             </h3>
           </a>
         </Link>
