@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 
 const BaseLayout = (props) => {
-  const { className, children, isAuthenticated, user, isSiteOwner, title} = props;
+  const { className, children, isAuthenticated, user, isSiteOwner, title, cannonical } = props;
   const headerType = props.headerType || 'default'
 
   return (
@@ -19,6 +19,9 @@ const BaseLayout = (props) => {
         <meta property="og:url" content="http://localhost:3000"/>
         <meta property="og:type" content="website"/>
         <meta property="og:description" content="My name is Slava Telyatko and I am an software engineer and freelance developer."/>
+        {cannonical && <link rel="cannonical" href={`http://localhost:3000${cannonical}`}/>}
+        
+        <link rel="icon" type="image/ico" href="/static/favicon.ico"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossOrigin="anonymous"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
       </Head>

@@ -40,10 +40,10 @@ class Index extends React.Component {
     return (
       <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} {...this.props.auth} 
                   headerType="index"
-                  title="Telyatko Slava - Portfolio App">
+                  title="Slava Telyatko - Portfolio App">
         <div className="main-section">
           <div className="background-image">
-            <img src="/static/images/background-index.png" />
+            <img alt="background image" src="/static/images/background-index.png" />
           </div>
           <Container>
             <Row>
@@ -53,7 +53,7 @@ class Index extends React.Component {
                     <div className="front">
                       <div className="hero-section-content">
                         <h2> Full Stack Web Developer </h2>
-                        <div className="hero-section-content-intro">
+                        <div alt="Developer picture" className="hero-section-content-intro">
                           Have a look at my portfolio and job history.
                         </div>
                       </div>
@@ -69,7 +69,7 @@ class Index extends React.Component {
                           Profesional and top quality service in web development.
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-2.png"/>
+                      <img  alt="Programming man welcom picture" className="image" src="/static/images/section-2.png"/>
                       <div className="shadow-custom shadow-custom-2">
                         <div className="shadow-inner"> </div>
                       </div>
@@ -99,9 +99,9 @@ class Index extends React.Component {
                 />
 
                 <div className="hero-welcome-bio">
-                  <h1>
+                  <h2>
                     Let's take a look on my work.
-                  </h1>
+                  </h2>
                 </div>
               </Col>
             </Row>
@@ -117,6 +117,3 @@ class Index extends React.Component {
 
 export default Index;
 
-/* <Header title={'I am a header component'}>
-<h1>I am header subtitle</h1>
-</Header>  */

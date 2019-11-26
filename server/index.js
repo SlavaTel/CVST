@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const next = require('next')
 const mongoose = require('mongoose')
 const routes = require('../routes')
@@ -16,6 +17,14 @@ const bodyParser = require('body-parser')
 const bookRoutes = require('./routes/book')
 const portfolioRoutes = require('./routes/portfolio')
 const blogRoutes = require('./routes/blog')
+
+const robotsOptions = {
+  root: path.join(__dirname, "../public/static"), 
+  headers: {
+    'Content-Type': 'text/plain;charset=UTF-8'
+  }
+}
+
 const secretData = [
   {
     title: 'SecretData 1',
@@ -32,7 +41,7 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: tru
         .catch(err => console.error(err))
 mongoose.set('useCreateIndex', true)
 
-// async () => await (mongoose.connect(config.DB_URI,{ useNewUrlParser: true }))()
+
 
 
 app.prepare()
@@ -44,7 +53,9 @@ app.prepare()
   server.use('/api/v1/books', bookRoutes)
   server.use('/api/v1/portfolios', portfolioRoutes)
   server.use('/api/v1/blogs', blogRoutes)
-
+  server.get('/robots.txt', (req, res) => {
+    return res.status(200).sendFile('robots.txt', robotsOptions)
+  })
 
   server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
     return res.json(secretData);
