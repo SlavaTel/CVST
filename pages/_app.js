@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-const namespace = 'http://localhost:3000'
 
 class MyApp extends App {
 
@@ -22,7 +21,7 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
     
-    const isSiteOwner = user && user[namespace + '/role'] === 'siteOwner';
+    const isSiteOwner = user && user[process.env.NAMESPACE + '/role'] === 'siteOwner';
     const auth = { user, isAuthenticated: !!user, isSiteOwner  };
 
     return { pageProps, auth }

@@ -4,13 +4,15 @@ import jwt from 'jsonwebtoken'
 import axios from 'axios'
 import { getCookieFromReq } from '../helpers/utils'
 
+const CLIENT_ID = process.env.CLIENT_ID
+
 class Auth0 {
   
   constructor() {
     this.auth0 = new auth0.WebAuth({
       domain: 'dev-w0x5cfuj.eu.auth0.com',
-      clientID: 'HlKzTn4GE26dTPwZATKJEX11RN3p943V',
-      redirectUri: 'http://localhost:3000/callback',
+      clientID: CLIENT_ID,
+      redirectUri: `${process.env.BASE_URL}/callback`,
       responseType: 'token id_token',
       scope: 'openid profile'
     });
@@ -18,7 +20,7 @@ class Auth0 {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
-    // this.isAuthenticated = this.isAuthenticated.bind(this)
+
 
 
     
@@ -41,24 +43,23 @@ class Auth0 {
 
   setSession(authResult) {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
-   // localStorage.setItem('access_token', authResult.accessToken);
+
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
 
-    Cookies.set('user', authResult.idTokenPayload);
+
     Cookies.set('jwt', authResult.idToken);
-    Cookies.set('expiresAt', expiresAt);
+
   }
 
   
   logout() {
-    Cookies.remove('user');
+
     Cookies.remove('jwt');
-    Cookies.remove('expiresAt');
-    
+ 
     this.auth0.logout({
       returnTo: '',
-      clientID: 'HlKzTn4GE26dTPwZATKJEX11RN3p943V'
+      clientID: CLIENT_ID
       
     })
   }
