@@ -3,6 +3,6 @@
 /resources
 /server/config/dev.js
 .prettierrc
-/static
 .gitignore
+.vscode
 
