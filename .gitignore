@@ -1,5 +1,6 @@
 /node_modules
 /.next
+/server/.next
 /resources
 /server/config/dev.js
 .prettierrc
