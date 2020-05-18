@@ -6,3 +6,4 @@
 /static
 .gitignore
 .pdf
+.env-config.js
